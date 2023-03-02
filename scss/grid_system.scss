@@ -1,0 +1,84 @@
+$columns: 12;
+
+.box-container{
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: aliceblue;
+    height: 100vh;
+    padding: 1rem;
+}
+
+.gs-row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+[class*="col-"],
+.col{
+    width: 100%;
+    max-width: 100%;
+
+}
+
+.col-auto  {
+  flex: 0 0 1;
+}
+
+@function calSizeCol($num){
+  @return (100%/$columns)*$num
+};
+
+@mixin grid-system-media-query($mq){
+  .#{ $mq }{
+    flex: 1 0 0;
+  }
+  @for $col from 1 through $columns{
+    .#{ $mq }-#{ $col }{
+      flex: 0 0 calSizeCol($col);
+      max-width: calSizeCol($col);
+      border: 1px dotted lightblue;
+      padding: .2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 320px){
+  @include grid-system-media-query(xxs-col);
+}
+
+@media (min-width: 320px) and (max-width: 578px){
+  @include grid-system-media-query(xs-col);
+}
+
+@media (min-width: 578px) and (max-width: 680px){
+  @include grid-system-media-query(ms-col);
+}
+
+@media (min-width: 680px) and (max-width: 768px){
+  @include grid-system-media-query(md-col);
+}
+
+@media (min-width: 768px) and (max-width: 965px){
+  @include grid-system-media-query(ml-col)
+}
+
+@media (min-width: 965px) and (max-width: 1024px){
+    @include grid-system-media-query(slg-col);
+}
+
+@media (min-width: 1024px) and (max-width: 1440px){
+  @include grid-system-media-query(mlg-col);
+}
+
+@media (min-width: 1440px) and (max-width: 1512px){
+  @include grid-system-media-query(xl-col);
+}
+
+@media (min-width: 1512px) and (max-width: 1718px){
+  @include grid-system-media-query(xxl-col);
+}
+
+@media screen and (min-width: 1920px){
+  @include grid-system-media-query(full-col);
+}
